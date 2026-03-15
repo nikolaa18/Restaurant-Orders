@@ -1,4 +1,4 @@
-package bg.tu_varna.sit.f24621690;
+package bg.tu_varna.sit.f24621690.base;
 
 import java.time.LocalDateTime;
 import java.util.HashMap;

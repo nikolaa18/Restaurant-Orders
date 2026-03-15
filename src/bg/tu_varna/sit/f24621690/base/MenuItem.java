@@ -1,6 +1,6 @@
-package bg.tu_varna.sit.f24621690;
+package bg.tu_varna.sit.f24621690.base;
 
-import jdk.jfr.Category;
+import bg.tu_varna.sit.f24621690.enums.ItemCategory;
 
 public class MenuItem {
     private final int id;

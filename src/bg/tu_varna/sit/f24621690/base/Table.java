@@ -1,4 +1,6 @@
-package bg.tu_varna.sit.f24621690;
+package bg.tu_varna.sit.f24621690.base;
+
+import bg.tu_varna.sit.f24621690.enums.TableAvailability;
 
 public class Table {
     private final int number;
