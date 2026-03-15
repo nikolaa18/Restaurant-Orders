@@ -11,6 +11,7 @@ public class Order {
     private LocalDateTime dateAndTime;
     private double total;
 
+    //add data control - exceptions
     public Order(int number, Table table, LocalDateTime dateAndTime, double total) {
         this.number = number;
         this.table = table;
