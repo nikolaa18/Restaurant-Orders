@@ -9,11 +9,32 @@ public class MenuItem {
     private double price;
     private int quantity;
 
+    //add data control - exceptions
     public MenuItem(int id, String name, ItemCategory itemCategory, double price, int quantity) {
         this.id = id;
         this.name = name;
         this.itemCategory = itemCategory;
         this.price = price;
         this.quantity = quantity;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public ItemCategory getItemCategory() {
+        return itemCategory;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public int getQuantity() {
+        return quantity;
     }
 }

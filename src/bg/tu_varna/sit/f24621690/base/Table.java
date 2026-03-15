@@ -7,9 +7,10 @@ public class Table {
     private int seats;
     private TableAvailability availability;
 
-    public Table(int number, int seats, TableAvailability availability) {
+    //add data control - exceptions
+    public Table(int number, int seats) {
         this.number = number;
         this.seats = seats;
-        this.availability = availability;
+        this.availability = TableAvailability.AVAILABLE;
     }
 }
