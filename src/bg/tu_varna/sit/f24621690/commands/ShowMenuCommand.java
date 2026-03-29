@@ -3,7 +3,8 @@ package bg.tu_varna.sit.f24621690.commands;
 import bg.tu_varna.sit.f24621690.base.Menu;
 import bg.tu_varna.sit.f24621690.base.MenuItem;
 
-public class PrintMenu {
+public class ShowMenuCommand {
+
     public String execute() {
         Menu menu = Menu.getInstance();
 

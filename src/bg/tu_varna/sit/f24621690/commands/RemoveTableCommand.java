@@ -1,21 +1,21 @@
 package bg.tu_varna.sit.f24621690.commands;
 
+import bg.tu_varna.sit.f24621690.base.Menu;
 import bg.tu_varna.sit.f24621690.base.Restaurant;
 import bg.tu_varna.sit.f24621690.base.Table;
 
-public class AddTable {
+public class RemoveTableCommand implements Command {
     private int number;
-    private int seats;
 
-    public AddTable(int number, int seats) {
+    //add data control - exceptions, if the id does not exist
+    public RemoveTableCommand(int number) {
         this.number = number;
-        this.seats = seats;
     }
 
+    @Override
     public void execute() {
-        Table table = new Table(number, seats);
-
         Restaurant restaurant = Restaurant.getInstance();
-        restaurant.getTables().add(table);
+
+        restaurant.getTables().remove(this.number);
     }
 }

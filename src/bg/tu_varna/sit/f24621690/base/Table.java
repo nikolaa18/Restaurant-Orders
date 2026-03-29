@@ -13,4 +13,20 @@ public class Table {
         this.seats = seats;
         this.availability = TableAvailability.AVAILABLE;
     }
+
+    public int getNumber() {
+        return number;
+    }
+
+    public int getSeats() {
+        return seats;
+    }
+
+    public TableAvailability getAvailability() {
+        return availability;
+    }
+
+    public void setAvailability(TableAvailability availability) {
+        this.availability = availability;
+    }
 }
