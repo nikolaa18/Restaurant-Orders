@@ -24,15 +24,36 @@ public class Order {
         this.total = 0;
     }
 
-    public void setItems(Map<MenuItem, Integer> items) {
-        this.items = items;
+    public Map<MenuItem, Integer> getItems() {
+        return items;
+    }
+
+    public double getTotal() {
+        return total;
+    }
+
+    public Table getTable() {
+        return table;
     }
 
     public void setOrderStatus(OrderStatus orderStatus) {
         this.orderStatus = orderStatus;
     }
 
-    public void setTotal(double total) {
-        this.total = total;
+    public void addItem(MenuItem item, int quantity) {
+        if (items.containsKey(item)) {
+            int oldQuantity = items.get(item);
+            items.put(item, oldQuantity + quantity);
+        } else {
+            items.put(item, quantity);
+        }
+
+        total += item.getPrice() * quantity;
+    }
+
+    public void removeItem(MenuItem item) {
+        int quantity = items.get(item);
+        total -= item.getPrice() * quantity;
+        items.remove(item);
     }
 }

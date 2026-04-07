@@ -22,8 +22,7 @@ public class OpenOrderCommand implements Command {
             throw new Exception("This table already has an opened order.");
         }
 
-        table.setAvailability(TableAvailability.TAKEN);
-
         Order order = new Order(table);
+        table.setAvailability(TableAvailability.TAKEN);
     }
 }
