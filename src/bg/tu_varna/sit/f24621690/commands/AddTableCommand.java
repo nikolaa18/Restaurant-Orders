@@ -13,10 +13,14 @@ public class AddTableCommand implements Command {
     }
 
     @Override
-    public void execute() {
-        Table table = new Table(number, seats);
-
+    public void execute() throws Exception {
         Restaurant restaurant = Restaurant.getInstance();
+
+        if (restaurant.getTables().containsKey(number)) {
+            throw new Exception("Table number " + number + " already exists.");
+        }
+
+        Table table = new Table(number, seats);
         restaurant.getTables().put(number, table);
     }
 }

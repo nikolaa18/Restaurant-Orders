@@ -2,14 +2,13 @@ package bg.tu_varna.sit.f24621690.commands;
 
 import bg.tu_varna.sit.f24621690.base.Order;
 import bg.tu_varna.sit.f24621690.base.Restaurant;
-import bg.tu_varna.sit.f24621690.base.Table;
 import bg.tu_varna.sit.f24621690.enums.OrderStatus;
 import bg.tu_varna.sit.f24621690.enums.TableAvailability;
 
-public class CloseOrderCommand implements Command {
+public class CancelOrderCommand implements Command {
     private int orderId;
 
-    public CloseOrderCommand(int orderId) {
+    public CancelOrderCommand(int orderId) {
         this.orderId = orderId;
     }
 
@@ -22,17 +21,9 @@ public class CloseOrderCommand implements Command {
             throw new Exception("Order not found!");
         }
 
-        if (order.getOrderStatus() != OrderStatus.OPEN) {
-            throw new Exception("Order is already closed or canceled.");
-        }
+        order.setOrderStatus(OrderStatus.CANCELED);
+        order.getTable().setAvailability(TableAvailability.AVAILABLE);
 
-        order.setOrderStatus(OrderStatus.PAID);
-
-        Table table = order.getTable();
-        if (table != null) {
-            table.setAvailability(TableAvailability.AVAILABLE);
-        }
-
-        System.out.println("Order " + orderId + " closed and paid. Table " + table.getNumber() + " is now free.");
+        System.out.println("Order " + orderId + " canceled. Table is now available.");
     }
 }

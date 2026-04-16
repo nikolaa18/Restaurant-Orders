@@ -35,5 +35,8 @@ public class AddToOrderCommand implements Command {
         }
 
         order.addItem(item, quantity);
+        item.reduceQuantity(quantity);
+
+        System.out.println("Added " + quantity + " x " + item.getName() + " to order #" + orderId);
     }
 }

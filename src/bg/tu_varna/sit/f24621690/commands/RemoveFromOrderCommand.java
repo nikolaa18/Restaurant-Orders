@@ -25,6 +25,12 @@ public class RemoveFromOrderCommand implements Command {
         if (order == null) {
             throw new Exception("Order not found!");
         }
-        order.removeItem(item);
+
+        Integer quantityInOrder = order.getItems().get(item);
+
+        if (quantityInOrder != null) {
+            item.setQuantity(item.getQuantity() + quantityInOrder);
+            order.removeItem(item);
+        }
     }
 }

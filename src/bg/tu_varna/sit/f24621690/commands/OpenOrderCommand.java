@@ -18,11 +18,17 @@ public class OpenOrderCommand implements Command {
         Restaurant restaurant = Restaurant.getInstance();
         Table table = restaurant.getTables().get(this.number);
 
-        if(table.getAvailability() == TableAvailability.TAKEN) {
-            throw new Exception("This table already has an opened order.");
+        if (table == null) {
+            throw new Exception("Table not found!");
+        }
+
+        if (table.getAvailability() == TableAvailability.TAKEN) {
+            throw new Exception("Table " + number + " is already occupied. Close the current order first.");
         }
 
         Order order = new Order(table);
         table.setAvailability(TableAvailability.TAKEN);
+
+        System.out.println("Order opened for table " + number);
     }
 }

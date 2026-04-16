@@ -11,7 +11,6 @@ public class AddItemCommand implements Command{
     private double price;
     private int quantity;
 
-    //Add exception for the name - is there another item called like that
     public AddItemCommand(int id, String name, ItemCategory itemCategory, double price, int quantity) {
         this.id = id;
         this.name = name;
@@ -21,10 +20,20 @@ public class AddItemCommand implements Command{
     }
 
     @Override
-    public void execute() {
-        MenuItem item = new MenuItem(id, name, itemCategory, price, quantity);
+    public void execute() throws Exception {
         Menu menu = Menu.getInstance();
 
+        if (menu.getItems().containsKey(id)) {
+            throw new Exception("Item with ID " + id + " already exists in the menu.");
+        }
+
+        for (MenuItem existingItem : menu.getItems().values()) {
+            if (existingItem.getName().equalsIgnoreCase(name)) {
+                throw new Exception("Item with name '" + name + "' already exists.");
+            }
+        }
+
+        MenuItem item = new MenuItem(id, name, itemCategory, price, quantity);
         menu.getItems().put(id, item);
     }
 }
