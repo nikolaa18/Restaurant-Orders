@@ -5,15 +5,16 @@ import bg.tu_varna.sit.f24621690.base.Menu;
 public class RemoveItemCommand  implements Command{
     private int id;
 
-    //add data control - exceptions, if the id does not exist
     public RemoveItemCommand(int id) {
         this.id = id;
     }
 
     @Override
-    public void execute() {
+    public void execute() throws Exception {
         Menu menu = Menu.getInstance();
-
+        if (!menu.getItems().containsKey(this.id)) {
+            throw new Exception("Cannot remove: Item with ID " + id + " not found.");
+        }
         menu.getItems().remove(this.id);
     }
 }

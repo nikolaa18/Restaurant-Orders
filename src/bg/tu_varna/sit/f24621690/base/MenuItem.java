@@ -9,13 +9,25 @@ public class MenuItem {
     private double price;
     private int quantity;
 
-    //add data control - exceptions
     public MenuItem(int id, String name, ItemCategory itemCategory, double price, int quantity) {
+        if (name == null || name.trim().isEmpty()) {
+            throw new IllegalArgumentException("Item name cannot be empty.");
+        }
+        if (price < 0) {
+            throw new IllegalArgumentException("Price cannot be negative.");
+        }
+        if (quantity < 0) {
+            throw new IllegalArgumentException("Quantity cannot be negative.");
+        }
         this.id = id;
         this.name = name;
         this.itemCategory = itemCategory;
         this.price = price;
         this.quantity = quantity;
+    }
+
+    public void reduceQuantity(int amount) {
+        this.quantity -= amount;
     }
 
     public int getId() {
@@ -36,5 +48,9 @@ public class MenuItem {
 
     public int getQuantity() {
         return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
     }
 }

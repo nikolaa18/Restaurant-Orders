@@ -7,8 +7,13 @@ public class Table {
     private int seats;
     private TableAvailability availability;
 
-    //add data control - exceptions
     public Table(int number, int seats) {
+        if (number <= 0) {
+            throw new IllegalArgumentException("Table number must be positive.");
+        }
+        if (seats <= 0) {
+            throw new IllegalArgumentException("Seats must be at least 1.");
+        }
         this.number = number;
         this.seats = seats;
         this.availability = TableAvailability.AVAILABLE;

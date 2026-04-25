@@ -4,6 +4,7 @@ import bg.tu_varna.sit.f24621690.base.Menu;
 import bg.tu_varna.sit.f24621690.base.MenuItem;
 import bg.tu_varna.sit.f24621690.base.Order;
 import bg.tu_varna.sit.f24621690.base.Restaurant;
+import bg.tu_varna.sit.f24621690.enums.OrderStatus;
 
 public class AddToOrderCommand implements Command {
     private int orderId;
@@ -32,6 +33,14 @@ public class AddToOrderCommand implements Command {
         }
         if (item.getQuantity() < quantity) {
             throw new Exception("Not enough stock!");
+        }
+
+        if (order.getOrderStatus() != OrderStatus.OPEN) {
+            throw new Exception("Cannot add items to a closed or canceled order.");
+        }
+
+        if (quantity <= 0) {
+            throw new Exception("Quantity to add must be greater than 0.");
         }
 
         order.addItem(item, quantity);

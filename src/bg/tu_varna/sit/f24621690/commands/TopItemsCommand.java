@@ -38,7 +38,6 @@ public class TopItemsCommand implements Command {
         }
 
         List<Map.Entry<MenuItem, Integer>> list = new ArrayList<>(itemCounts.entrySet());
-
         list.sort(Comparator.comparing(Map.Entry<MenuItem, Integer>::getValue).reversed());
 
         System.out.println("--- Top " + n + " Best Selling Items ---");
