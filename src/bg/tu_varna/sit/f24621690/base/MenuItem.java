@@ -2,14 +2,16 @@ package bg.tu_varna.sit.f24621690.base;
 
 import bg.tu_varna.sit.f24621690.enums.ItemCategory;
 
+import java.util.UUID;
+
 public class MenuItem {
-    private final int id;
+    private final String id;
     private final String name;
     private final ItemCategory itemCategory;
     private double price;
     private int quantity;
 
-    public MenuItem(int id, String name, ItemCategory itemCategory, double price, int quantity) {
+    public MenuItem(String id, String name, ItemCategory itemCategory, double price, int quantity) {
         if (name == null || name.trim().isEmpty()) {
             throw new IllegalArgumentException("Item name cannot be empty.");
         }
@@ -19,7 +21,7 @@ public class MenuItem {
         if (quantity < 0) {
             throw new IllegalArgumentException("Quantity cannot be negative.");
         }
-        this.id = id;
+        this.id = UUID.randomUUID().toString().substring(0, 4).toUpperCase();
         this.name = name;
         this.itemCategory = itemCategory;
         this.price = price;
@@ -30,7 +32,7 @@ public class MenuItem {
         this.quantity -= amount;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 

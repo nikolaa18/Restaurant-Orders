@@ -6,7 +6,7 @@ import java.util.Map;
 public class Menu {
 
     private static Menu instance;
-    private Map<Integer, MenuItem> items;
+    private Map<String, MenuItem> items;
 
     public Menu() {
         this.items = new HashMap<>();
@@ -20,7 +20,7 @@ public class Menu {
         return instance;
     }
 
-    public Map<Integer, MenuItem> getItems() {
+    public Map<String, MenuItem> getItems() {
         return items;
     }
 }

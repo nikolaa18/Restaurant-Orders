@@ -1,11 +1,13 @@
 package bg.tu_varna.sit.f24621690.io;
 
 import bg.tu_varna.sit.f24621690.base.*;
+import bg.tu_varna.sit.f24621690.enums.ItemCategory;
+import bg.tu_varna.sit.f24621690.enums.TableAvailability;
+
 import java.io.*;
-import java.util.Map;
 
 public class FileManager {
-    private String currentFilePath;
+    private String currentFile;
 
     public void save(String path) throws IOException {
         try (PrintWriter out = new PrintWriter(new FileWriter(path))) {
@@ -14,26 +16,50 @@ public class FileManager {
                         item.getItemCategory() + "," + item.getPrice() + "," + item.getQuantity());
             }
             for (Table table : Restaurant.getInstance().getTables().values()) {
-                out.println("TABLE," + table.getNumber() + "," + table.getSeats());
+                out.println("TABLE," + table.getNumber() + "," + table.getSeats() + "," + table.getAvailability());
             }
-            this.currentFilePath = path;
-            System.out.println("Successfully saved to " + path);
+            System.out.println("Data successfully saved.");
         }
     }
 
-    public void open(String path) throws Exception {
-        File file = new File(path);
+    public void open(String filename) throws Exception {
+        File file = new File(filename);
         if (!file.exists()) {
             file.createNewFile();
-            System.out.println("Created new empty file.");
+            System.out.println("Created new empty file: " + filename);
+            this.currentFile = filename;
             return;
         }
 
-        this.currentFilePath = path;
-        System.out.println("Successfully opened " + path);
+        try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                String[] parts = line.split(",");
+                String type = parts[0];
+
+                if (type.equals("ITEM")) {
+                    MenuItem item = new MenuItem(
+                            parts[1],
+                            parts[2],
+                            ItemCategory.valueOf(parts[3]),
+                            Double.parseDouble(parts[4]),
+                            Integer.parseInt(parts[5])
+                    );
+                    Menu.getInstance().getItems().put(item.getId(), item);
+                } else if (type.equals("TABLE")) {
+                    Table table = new Table(Integer.parseInt(parts[1]), Integer.parseInt(parts[2]));
+                    table.setAvailability(TableAvailability.valueOf(parts[3]));
+                    Restaurant.getInstance().getTables().put(table.getNumber(), table);
+                }
+            }
+            this.currentFile = filename;
+            System.out.println("Successfully loaded data from " + filename);
+        } catch (IOException | IllegalArgumentException e) {
+            throw new Exception("Error reading file: " + e.getMessage());
+        }
     }
 
-    public String getCurrentFilePath() {
-        return currentFilePath;
+    public String getCurrentFile() {
+        return currentFile;
     }
 }

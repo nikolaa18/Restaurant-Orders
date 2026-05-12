@@ -1,11 +1,18 @@
 package bg.tu_varna.sit.f24621690.commands.factory;
 
-import bg.tu_varna.sit.f24621690.commands.RemoveTableCommand;
-import bg.tu_varna.sit.f24621690.commands.factory.CommandFactory;
+import bg.tu_varna.sit.f24621690.commands.command.RemoveTableCommand;
 
 // Factory for: removetable <number>
 public class RemoveTableFactory implements CommandFactory {
     public void execute(String[] args) throws Exception {
-        new RemoveTableCommand(Integer.parseInt(args[1]));
+        try {
+            int number = Integer.parseInt(args[1]);
+            new RemoveTableCommand(number).execute(); // Added .execute()
+            System.out.println("Table removed successfully.");
+        } catch (NumberFormatException e) {
+            throw new Exception("Table number must be an integer.");
+        } catch (ArrayIndexOutOfBoundsException e) {
+            throw new Exception("Usage: removetable <number>");
+        }
     }
 }

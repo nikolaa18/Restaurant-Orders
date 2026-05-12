@@ -8,6 +8,6 @@ public class SaveFactory implements CommandFactory {
     private FileManager fm;
     public SaveFactory(FileManager fm) { this.fm = fm; }
     public void execute(String[] args) throws Exception {
-        fm.save(fm.getCurrentFilePath());
+        fm.save(fm.getCurrentFile());
     }
 }

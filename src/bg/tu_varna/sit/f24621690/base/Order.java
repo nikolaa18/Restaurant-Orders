@@ -5,23 +5,31 @@ import bg.tu_varna.sit.f24621690.enums.OrderStatus;
 import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
 
 public class Order {
-    private final int number;
+    private final String id;
     private Table table;
     private Map<MenuItem, Integer> items;
     private OrderStatus orderStatus;
     private LocalDateTime dateAndTime;
     private double total;
 
-    //add data control - exceptions
-    public Order(Table table) {
-        this.number = 0;
+    public Order(Table table) throws Exception {
+        if (table == null) {
+            throw new Exception("Order cannot be created without a valid table.");
+        }
+        this.id = UUID.randomUUID().toString().substring(0, 3).toUpperCase();
+
         this.table = table;
         this.items = new HashMap<>();
         this.orderStatus = OrderStatus.OPEN;
         this.dateAndTime = LocalDateTime.now();
         this.total = 0;
+    }
+
+    public String getId() {
+        return id;
     }
 
     public Map<MenuItem, Integer> getItems() {
