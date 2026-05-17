@@ -3,16 +3,34 @@ package bg.tu_varna.sit.f24621690.base;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Клас (Singleton), съхраняващ всички налични артикули в ресторанта.
+ */
 public class Menu {
-
+    /** Единствената инстанция на менюто */
     private static Menu instance;
+
+    /** Колекция от всички налични артикули, достъпни по тяхното ID. */
     private Map<String, MenuItem> items;
 
-    public Menu() {
+    /**
+     * Частен конструктор, предотвратяващ директно директно инстанциране от други класове.
+     * Инициализира празна колекция за артикулите.
+     */
+    private Menu() {
         this.items = new HashMap<>();
     }
 
-    //Singleton
+    /**
+     * Връща единствената споделена инстанция на класа Menu в приложението.
+     * Методът реализира шаблона за дизайн Singleton, като осигурява
+     * глобална точка за достъп до структурата от данни, съдържаща всички
+     * артикули. По този начин се гарантира консистентност на менюто в паметта
+     * и се предотвратява нежелано дублиране на обекти.
+     *
+     * @return Единствената инстанция на класа Menu, която управлява
+     * актуалната колекция от артикули в ресторанта.
+     */
     public static Menu getInstance() {
         if(instance == null) {
             instance = new Menu();
@@ -20,6 +38,10 @@ public class Menu {
         return instance;
     }
 
+    /**
+     * Връща списъка с всички налични артикули в менюто.
+     * @return Map колекция от артикули.
+     */
     public Map<String, MenuItem> getItems() {
         return items;
     }
