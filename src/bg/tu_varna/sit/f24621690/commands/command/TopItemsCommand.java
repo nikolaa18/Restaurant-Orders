@@ -21,7 +21,7 @@ public class TopItemsCommand implements Command {
     }
 
     @Override
-    public void execute() {
+    public String execute() {
         Restaurant restaurant = Restaurant.getInstance();
         Map<MenuItem, Integer> itemCounts = new HashMap<>();
 
@@ -41,16 +41,18 @@ public class TopItemsCommand implements Command {
         List<Map.Entry<MenuItem, Integer>> list = new ArrayList<>(itemCounts.entrySet());
         list.sort(Comparator.comparing(Map.Entry<MenuItem, Integer>::getValue).reversed());
 
-        System.out.println("--- Top " + n + " Best Selling Items ---");
+        StringBuilder sb = new StringBuilder();
+        sb.append("--- Top ").append(n).append(" Best Selling Items ---\n");
         int count = 0;
         for (Map.Entry<MenuItem, Integer> entry : list) {
-            if (count >= n) break;
-            System.out.println(entry.getKey().getName() + " - Sold: " + entry.getValue());
+            if (count >= n) {
+                break;
+            }
+            sb.append(entry.getKey().getName()).append(" - Sold: ").append(entry.getValue()).append("\n");
             count++;
         }
 
-        if (list.isEmpty()) {
-            System.out.println("No sales found for this period.");
-        }
+        if (list.isEmpty()) sb.append("No sales found for this period.");
+        return sb.toString().trim();
     }
 }

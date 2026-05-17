@@ -14,7 +14,7 @@ public class AddTableCommand implements Command {
     }
 
     @Override
-    public void execute() throws Exception {
+    public String execute() throws Exception {
         Restaurant restaurant = Restaurant.getInstance();
 
         if (restaurant.getTables().containsKey(number)) {
@@ -23,5 +23,6 @@ public class AddTableCommand implements Command {
 
         Table table = new Table(number, seats);
         restaurant.getTables().put(number, table);
+        return "Table " + number + " added successfully.";
     }
 }

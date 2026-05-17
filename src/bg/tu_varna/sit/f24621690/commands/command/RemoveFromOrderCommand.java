@@ -16,7 +16,7 @@ public class RemoveFromOrderCommand implements Command {
     }
 
     @Override
-    public void execute() throws Exception {
+    public String execute() throws Exception {
         Restaurant restaurant = Restaurant.getInstance();
         Menu menu = Menu.getInstance();
 
@@ -32,6 +32,8 @@ public class RemoveFromOrderCommand implements Command {
         if (quantityInOrder != null) {
             item.setQuantity(item.getQuantity() + quantityInOrder);
             order.removeItem(item);
+            return "Item removed from order. Restored to stock.";
         }
+        throw new Exception("Item not found in current order.");
     }
 }

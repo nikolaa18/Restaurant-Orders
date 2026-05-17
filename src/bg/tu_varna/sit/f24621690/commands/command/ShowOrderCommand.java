@@ -14,7 +14,7 @@ public class ShowOrderCommand implements Command {
     }
 
     @Override
-    public void execute() throws Exception {
+    public String execute() throws Exception {
         Restaurant restaurant = Restaurant.getInstance();
         Order order = restaurant.getOrders().get(orderId);
 
@@ -22,11 +22,14 @@ public class ShowOrderCommand implements Command {
             throw new Exception("Order not found!");
         }
 
-        System.out.println("Order ID: " + orderId + " | Table: " + order.getTable().getNumber());
-        System.out.println("Items:");
+        StringBuilder sb = new StringBuilder();
+        sb.append(String.format("Order ID: %s | Table: %d\n", orderId, order.getTable().getNumber()));
+        sb.append("Items:\n");
         for (Map.Entry<MenuItem, Integer> entry : order.getItems().entrySet()) {
-            System.out.println("- " + entry.getKey().getName() + " x" + entry.getValue() + " : " + (entry.getKey().getPrice() * entry.getValue()) + " lv.");
+            sb.append(String.format("- %s x%d : %.2f eur.\n",
+                    entry.getKey().getName(), entry.getValue(), entry.getKey().getPrice() * entry.getValue()));
         }
-        System.out.println("Total Sum: " + order.getTotal() + " lv.");
+        sb.append(String.format("Total Sum: %.2f eur.", order.getTotal()));
+        return sb.toString();
     }
 }

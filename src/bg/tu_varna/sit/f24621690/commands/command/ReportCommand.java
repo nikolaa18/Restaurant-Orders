@@ -16,7 +16,7 @@ public class ReportCommand implements Command {
     }
 
     @Override
-    public void execute() {
+    public String execute() {
         Restaurant restaurant = Restaurant.getInstance();
         double totalRevenue = 0;
 
@@ -27,6 +27,6 @@ public class ReportCommand implements Command {
                 totalRevenue += order.getTotal();
             }
         }
-        System.out.println("Total revenue from " + from + " to " + to + ": " + totalRevenue + " lv.");
+        return String.format("Total revenue from %s to %s: %.2f eur.", from, to, totalRevenue);
     }
 }

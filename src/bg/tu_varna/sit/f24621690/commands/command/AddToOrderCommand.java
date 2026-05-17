@@ -9,17 +9,17 @@ import bg.tu_varna.sit.f24621690.enums.OrderStatus;
 // Command for: addtoorder <orderId> <itemId> <quantity>
 public class AddToOrderCommand implements Command {
     private String orderId;
-    private int itemId;
+    private String itemId;
     private int quantity;
 
-    public AddToOrderCommand(String orderId, int itemId, int quantity) {
+    public AddToOrderCommand(String orderId, String itemId, int quantity) {
         this.orderId = orderId;
         this.itemId = itemId;
         this.quantity = quantity;
     }
 
     @Override
-    public void execute() throws Exception {
+    public String execute() throws Exception {
         Restaurant restaurant = Restaurant.getInstance();
         Menu menu = Menu.getInstance();
 
@@ -47,6 +47,6 @@ public class AddToOrderCommand implements Command {
         order.addItem(item, quantity);
         item.reduceQuantity(quantity);
 
-        System.out.println("Added " + quantity + " x " + item.getName() + " to order #" + orderId);
+        return "Added " + quantity + " x " + item.getName() + " to order #" + orderId;
     }
 }

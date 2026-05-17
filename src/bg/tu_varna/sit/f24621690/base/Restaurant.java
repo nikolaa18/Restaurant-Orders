@@ -7,7 +7,7 @@ import java.util.Map;
 public class Restaurant {
     public static Restaurant instance;
     private Map<Integer, Table> tables;
-    private Map<Integer, Order> orders;
+    private Map<String, Order> orders;
 
     public Restaurant() {
         this.tables = new HashMap<>();
@@ -26,7 +26,7 @@ public class Restaurant {
         return tables;
     }
 
-    public Map<Integer, Order> getOrders() {
+    public Map<String, Order> getOrders() {
         return orders;
     }
 }

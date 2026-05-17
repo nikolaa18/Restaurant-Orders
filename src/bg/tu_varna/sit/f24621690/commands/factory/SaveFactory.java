@@ -6,8 +6,13 @@ import bg.tu_varna.sit.f24621690.io.FileManager;
 // Factory for: save
 public class SaveFactory implements CommandFactory {
     private FileManager fm;
-    public SaveFactory(FileManager fm) { this.fm = fm; }
-    public void execute(String[] args) throws Exception {
-        fm.save(fm.getCurrentFile());
+
+    public SaveFactory(FileManager fm) {
+        this.fm = fm;
+    }
+
+    @Override
+    public String execute(String[] args) throws Exception {
+        return fm.save(fm.getCurrentFile());
     }
 }

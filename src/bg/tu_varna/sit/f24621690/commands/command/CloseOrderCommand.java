@@ -15,7 +15,7 @@ public class CloseOrderCommand implements Command {
     }
 
     @Override
-    public void execute() throws Exception {
+    public String execute() throws Exception {
         Restaurant restaurant = Restaurant.getInstance();
         Order order = restaurant.getOrders().get(orderId);
 
@@ -34,6 +34,6 @@ public class CloseOrderCommand implements Command {
             table.setAvailability(TableAvailability.AVAILABLE);
         }
 
-        System.out.println("Order " + orderId + " closed and paid. Table " + table.getNumber() + " is now free.");
+        return "Order " + orderId + " closed and paid. Table is now available.";
     }
 }

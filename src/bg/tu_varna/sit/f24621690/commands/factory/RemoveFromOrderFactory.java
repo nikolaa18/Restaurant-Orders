@@ -4,10 +4,14 @@ import bg.tu_varna.sit.f24621690.commands.command.RemoveFromOrderCommand;
 
 // Factory for: removefromorder <orderId> <itemId>
 public class RemoveFromOrderFactory implements CommandFactory {
-    public void execute(String[] args) throws Exception {
-        String orderId = args[1];
-        String itemId = args[2];
-        new RemoveFromOrderCommand(orderId, itemId).execute();
-        System.out.println("Item removed from order.");
+    @Override
+    public String execute(String[] args) throws Exception {
+        try {
+            String orderId = args[1];
+            String itemId = args[2];
+            return new RemoveFromOrderCommand(orderId, itemId).execute();
+        } catch (ArrayIndexOutOfBoundsException e) {
+            throw new Exception("Missing parameters. Usage: removefromorder <orderId> <itemId>");
+        }
     }
 }

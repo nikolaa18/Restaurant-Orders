@@ -9,7 +9,7 @@ import java.io.*;
 public class FileManager {
     private String currentFile;
 
-    public void save(String path) throws IOException {
+    public String save(String path) throws IOException {
         try (PrintWriter out = new PrintWriter(new FileWriter(path))) {
             for (MenuItem item : Menu.getInstance().getItems().values()) {
                 out.println("ITEM," + item.getId() + "," + item.getName() + "," +
@@ -18,17 +18,16 @@ public class FileManager {
             for (Table table : Restaurant.getInstance().getTables().values()) {
                 out.println("TABLE," + table.getNumber() + "," + table.getSeats() + "," + table.getAvailability());
             }
-            System.out.println("Data successfully saved.");
+            return "Data successfully saved to " + path;
         }
     }
 
-    public void open(String filename) throws Exception {
+    public String open(String filename) throws Exception {
         File file = new File(filename);
         if (!file.exists()) {
             file.createNewFile();
-            System.out.println("Created new empty file: " + filename);
             this.currentFile = filename;
-            return;
+            return "Created new empty file: " + filename;
         }
 
         try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
@@ -53,10 +52,23 @@ public class FileManager {
                 }
             }
             this.currentFile = filename;
-            System.out.println("Successfully loaded data from " + filename);
+            return "Successfully loaded data from " + filename;
         } catch (IOException | IllegalArgumentException e) {
             throw new Exception("Error reading file: " + e.getMessage());
         }
+    }
+
+    public String close() throws Exception {
+        if (this.currentFile == null) {
+            throw new Exception("There is no open file to close.");
+        }
+
+        Menu.getInstance().getItems().clear();
+        Restaurant.getInstance().getTables().clear();
+        Restaurant.getInstance().getOrders().clear();
+
+        this.currentFile = null;
+        return "Successfully closed " + this.currentFile;
     }
 
     public String getCurrentFile() {

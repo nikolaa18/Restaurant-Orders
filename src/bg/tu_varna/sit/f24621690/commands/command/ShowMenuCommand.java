@@ -6,16 +6,14 @@ import bg.tu_varna.sit.f24621690.base.MenuItem;
 // Command for: menu (no parameters)
 public class ShowMenuCommand implements Command {
     @Override
-    public void execute() {
+    public String execute() {
         Menu menu = Menu.getInstance();
-        System.out.println("----- MENU -----");
+        StringBuilder sb = new StringBuilder();
+        sb.append("----- MENU -----\n");
         for (MenuItem item : menu.getItems().values()) {
-            System.out.println(
-                    "ID: " + item.getId() +
-                    " | Name: " + item.getName() +
-                    " | Category: " + item.getItemCategory() +
-                    " | Price: " + item.getPrice() + " lv." +
-                    " | Stock: " + item.getQuantity());
+            sb.append(String.format("ID: %s | Name: %s | Category: %s | Price: %.2f eur. | Stock: %d\n",
+                    item.getId(), item.getName(), item.getItemCategory(), item.getPrice(), item.getQuantity()));
         }
+        return sb.toString().trim();
     }
 }

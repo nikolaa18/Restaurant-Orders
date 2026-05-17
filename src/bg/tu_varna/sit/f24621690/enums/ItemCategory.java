@@ -2,7 +2,7 @@ package bg.tu_varna.sit.f24621690.enums;
 
 public enum ItemCategory {
     APPETISER,
-    SALAT,
+    SALAD,
     SOUP,
     MAIN,
     DESSERT,

@@ -1,10 +1,10 @@
-package bg.tu_varna.sit.f24621690.application;
+package bg.tu_varna.sit.f24621690;
 
 import bg.tu_varna.sit.f24621690.commands.factory.*;
 import bg.tu_varna.sit.f24621690.io.FileManager;
 import java.util.*;
 
-public class Main {
+public class Application {
     private static final Map<String, CommandFactory> commandMap = new HashMap<>();
     private static final FileManager fileManager = new FileManager();
     private static boolean running = true;
@@ -12,12 +12,14 @@ public class Main {
     public static void main(String[] args) {
         initializeAllCommands();
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Restaurant System started. Type 'help' for commands.");
+        System.out.println("Restaurant Management System started. Type 'help' for commands.");
 
         while (running) {
             System.out.print("> ");
             String input = scanner.nextLine().trim();
-            if (input.isEmpty()) continue;
+            if (input.isEmpty()) {
+                continue;
+            }
 
             String[] parts = input.split("\\s+");
             String cmdName = parts[0].toLowerCase();
@@ -27,7 +29,17 @@ public class Main {
                 System.out.println("Exiting program...");
             } else if (commandMap.containsKey(cmdName)) {
                 try {
-                    commandMap.get(cmdName).execute(parts);
+                    if (fileManager.getCurrentFile() == null && !cmdName.equals("open") && !cmdName.equals("help")) {
+                        System.out.println("Error: No file is currently open. Please use 'open <file>' to begin.");
+                        continue;
+                    }
+
+                    String resultMessage = commandMap.get(cmdName).execute(parts);
+
+                    if (resultMessage != null && !resultMessage.isEmpty()) {
+                        System.out.println(resultMessage);
+                    }
+
                 } catch (ArrayIndexOutOfBoundsException e) {
                     System.out.println("Error: Missing parameters for '" + cmdName + "'.");
                 } catch (Exception e) {
@@ -43,6 +55,7 @@ public class Main {
     private static void initializeAllCommands() {
         // File Commands
         commandMap.put("open", new OpenFileFactory(fileManager));
+        commandMap.put("close", new CloseFileFactory(fileManager));
         commandMap.put("save", new SaveFactory(fileManager));
         commandMap.put("saveas", new SaveAsFactory(fileManager));
         commandMap.put("help", new HelpFactory());
@@ -64,6 +77,7 @@ public class Main {
         commandMap.put("showorder", new ShowOrderFactory());
         commandMap.put("closeorder", new CloseOrderFactory());
         commandMap.put("cancelorder", new CancelOrderFactory());
+        commandMap.put("orders", new OrdersFactory());
 
         // Statistics
         commandMap.put("report", new ReportFactory());

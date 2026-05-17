@@ -12,20 +12,23 @@ public class LowStockCommand implements Command {
     }
 
     @Override
-    public void execute() {
+    public String execute() {
         Menu menu = Menu.getInstance();
-        System.out.println("--- Low Stock Items (Below " + threshold + ") ---");
+        StringBuilder sb = new StringBuilder();
+        sb.append("--- Low Stock Items (Below ").append(threshold).append(") ---\n");
 
         boolean found = false;
         for (MenuItem item : menu.getItems().values()) {
             if (item.getQuantity() < threshold) {
-                System.out.println("ID: " + item.getId() + " | Name: " + item.getName() + " | Stock: " + item.getQuantity());
+                sb.append(String.format("ID: %s | Name: %s | Stock: %d\n",
+                        item.getId(), item.getName(), item.getQuantity()));
                 found = true;
             }
         }
 
         if (!found) {
-            System.out.println("All items are well stocked.");
+            sb.append("All items are well stocked.");
         }
+        return sb.toString().trim();
     }
 }

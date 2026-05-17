@@ -11,11 +11,12 @@ public class RemoveItemCommand  implements Command{
     }
 
     @Override
-    public void execute() throws Exception {
+    public String execute() throws Exception {
         Menu menu = Menu.getInstance();
         if (!menu.getItems().containsKey(this.id)) {
             throw new Exception("Cannot remove: Item with ID " + id + " not found.");
         }
         menu.getItems().remove(this.id);
+        return "Item removed successfully.";
     }
 }

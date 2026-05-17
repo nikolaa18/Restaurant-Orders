@@ -21,7 +21,7 @@ public class MenuItem {
         if (quantity < 0) {
             throw new IllegalArgumentException("Quantity cannot be negative.");
         }
-        this.id = UUID.randomUUID().toString().substring(0, 4).toUpperCase();
+        this.id = id;
         this.name = name;
         this.itemCategory = itemCategory;
         this.price = price;

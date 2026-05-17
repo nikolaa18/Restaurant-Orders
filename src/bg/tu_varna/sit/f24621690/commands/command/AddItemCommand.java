@@ -21,7 +21,7 @@ public class AddItemCommand implements Command{
     }
 
     @Override
-    public void execute() throws Exception {
+    public String execute() throws Exception {
         Menu menu = Menu.getInstance();
 
         if (menu.getItems().containsKey(id)) {
@@ -36,5 +36,6 @@ public class AddItemCommand implements Command{
 
         MenuItem item = new MenuItem(id, name, itemCategory, price, quantity);
         menu.getItems().put(id, item);
+        return "Item '" + name + "' added to menu.";
     }
 }

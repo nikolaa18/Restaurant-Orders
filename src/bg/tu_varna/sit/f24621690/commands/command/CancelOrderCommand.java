@@ -14,7 +14,7 @@ public class CancelOrderCommand implements Command {
     }
 
     @Override
-    public void execute() throws Exception {
+    public String execute() throws Exception {
         Restaurant restaurant = Restaurant.getInstance();
         Order order = restaurant.getOrders().get(orderId);
 
@@ -25,6 +25,6 @@ public class CancelOrderCommand implements Command {
         order.setOrderStatus(OrderStatus.CANCELED);
         order.getTable().setAvailability(TableAvailability.AVAILABLE);
 
-        System.out.println("Order " + orderId + " canceled. Table is now available.");
+        return "Order " + orderId + " canceled. Table is now available.";
     }
 }

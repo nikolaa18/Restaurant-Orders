@@ -15,7 +15,7 @@ public class OpenOrderCommand implements Command {
     }
 
     @Override
-    public void execute() throws Exception {
+    public String execute() throws Exception {
         Restaurant restaurant = Restaurant.getInstance();
         Table table = restaurant.getTables().get(this.number);
 
@@ -24,12 +24,13 @@ public class OpenOrderCommand implements Command {
         }
 
         if (table.getAvailability() == TableAvailability.TAKEN) {
-            throw new Exception("Table " + number + " is already occupied. Close the current order first.");
+            throw new Exception("Table #" + number + " is already occupied. Close the current order first.");
         }
 
         Order order = new Order(table);
         table.setAvailability(TableAvailability.TAKEN);
+        restaurant.getOrders().put(order.getId(), order);
 
-        System.out.println("Order opened for table " + number);
+        return "Order opened for table " + number + ". Order ID: " + order.getId();
     }
 }

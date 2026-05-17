@@ -11,11 +11,12 @@ public class RemoveTableCommand implements Command {
     }
 
     @Override
-    public void execute() throws Exception {
+    public String execute() throws Exception {
         Restaurant restaurant = Restaurant.getInstance();
         if (!restaurant.getTables().containsKey(this.number)) {
             throw new Exception("Cannot remove: Table " + number + " not found.");
         }
         restaurant.getTables().remove(this.number);
+        return "Table " + number + " removed successfully.";
     }
 }
