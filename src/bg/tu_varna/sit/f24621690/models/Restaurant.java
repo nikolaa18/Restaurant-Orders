@@ -1,7 +1,6 @@
-package bg.tu_varna.sit.f24621690.base;
+package bg.tu_varna.sit.f24621690.models;
 
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Map;
 
 /**

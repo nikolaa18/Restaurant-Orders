@@ -1,8 +1,8 @@
 package bg.tu_varna.sit.f24621690.commands.command.order;
 
-import bg.tu_varna.sit.f24621690.base.Order;
-import bg.tu_varna.sit.f24621690.base.Restaurant;
-import bg.tu_varna.sit.f24621690.base.Table;
+import bg.tu_varna.sit.f24621690.models.Order;
+import bg.tu_varna.sit.f24621690.models.Restaurant;
+import bg.tu_varna.sit.f24621690.models.Table;
 import bg.tu_varna.sit.f24621690.commands.command.Command;
 import bg.tu_varna.sit.f24621690.enums.TableAvailability;
 

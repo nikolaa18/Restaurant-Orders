@@ -1,7 +1,7 @@
 package bg.tu_varna.sit.f24621690.commands.command.statistics;
 
-import bg.tu_varna.sit.f24621690.base.Menu;
-import bg.tu_varna.sit.f24621690.base.MenuItem;
+import bg.tu_varna.sit.f24621690.models.Menu;
+import bg.tu_varna.sit.f24621690.models.MenuItem;
 import bg.tu_varna.sit.f24621690.commands.command.Command;
 
 /** Команда за проверка и извеждане на артикулите, чиито наличности са под определена критична стойност. */

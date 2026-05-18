@@ -1,7 +1,7 @@
 package bg.tu_varna.sit.f24621690.commands.command.table;
 
-import bg.tu_varna.sit.f24621690.base.Restaurant;
-import bg.tu_varna.sit.f24621690.base.Table;
+import bg.tu_varna.sit.f24621690.models.Restaurant;
+import bg.tu_varna.sit.f24621690.models.Table;
 import bg.tu_varna.sit.f24621690.commands.command.Command;
 
 /** Команда за визуализиране на всички маси в ресторанта и техния статус. */

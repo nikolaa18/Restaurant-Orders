@@ -1,8 +1,10 @@
 package bg.tu_varna.sit.f24621690.commands.command.order;
 
-import bg.tu_varna.sit.f24621690.base.Order;
-import bg.tu_varna.sit.f24621690.base.Restaurant;
+import bg.tu_varna.sit.f24621690.models.Order;
+import bg.tu_varna.sit.f24621690.models.Restaurant;
 import bg.tu_varna.sit.f24621690.commands.command.Command;
+
+import java.time.format.DateTimeFormatter;
 
 /**
  * Команда за извеждане на пълния списък или хронология на направените поръчки в ресторанта.
@@ -32,12 +34,13 @@ public class OrdersCommand implements Command {
         StringBuilder sb = new StringBuilder();
         sb.append("----- ORDERS -----\n");
         boolean found = false;
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 
         for (Order order : restaurant.getOrders().values()) {
             if (statusFilter == null || order.getOrderStatus().name().equalsIgnoreCase(statusFilter)) {
                 sb.append(String.format("ID: %s | Table #%d | Status: %s | Total: %.2f eur. | Date: %s\n",
                         order.getId(), order.getTable().getNumber(), order.getOrderStatus(),
-                        order.getTotal(), order.getDateAndTime()));
+                        order.getTotal(), order.getDateAndTime().format(formatter)));
                 found = true;
             }
         }

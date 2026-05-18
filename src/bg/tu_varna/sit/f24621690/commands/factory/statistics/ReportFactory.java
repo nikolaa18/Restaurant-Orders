@@ -4,6 +4,7 @@ import bg.tu_varna.sit.f24621690.commands.command.statistics.ReportCommand;
 import bg.tu_varna.sit.f24621690.commands.factory.CommandFactory;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 /**
@@ -25,11 +26,12 @@ public class ReportFactory implements CommandFactory {
     @Override
     public String execute(String[] args) throws Exception {
         try {
-            LocalDateTime from = LocalDateTime.parse(args[1]);
-            LocalDateTime to = LocalDateTime.parse(args[2]);
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd_HH:mm");
+            LocalDateTime from = LocalDateTime.parse(args[1], formatter);
+            LocalDateTime to = LocalDateTime.parse(args[2], formatter);
             return new ReportCommand(from, to).execute();
         } catch (DateTimeParseException e) {
-            throw new Exception("Invalid date format. Please use format: yyyy-MM-ddTHH:mm (2026-05-14T14:25)");
+            throw new Exception("Invalid date format. Please use format: yyyy-MM-dd_HH:mm (2026-05-14_14:25)");
         } catch (ArrayIndexOutOfBoundsException e) {
             throw new Exception("Missing parameters. Usage: report <from> <to>");
         }

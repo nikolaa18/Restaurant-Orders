@@ -1,4 +1,4 @@
-package bg.tu_varna.sit.f24621690.base;
+package bg.tu_varna.sit.f24621690.models;
 
 import bg.tu_varna.sit.f24621690.enums.OrderStatus;
 
@@ -45,6 +45,25 @@ public class Order {
         this.orderStatus = OrderStatus.OPEN;
         this.dateAndTime = LocalDateTime.now();
         this.total = 0;
+    }
+
+    /**
+     * Презареден конструктор за възстановяване на съществуваща поръчка от файл.
+     * Използва се от FileManager при зареждане на историята на данните.
+     *
+     * @param id Оригиналният идентификатор на поръчката.
+     * @param table Масата, свързана с поръчката.
+     * @param orderStatus Статусът на поръчката (OPEN, PAID, CANCELED).
+     * @param dateAndTime Датата и часът на създаване.
+     * @param total Общата сума на поръчката.
+     */
+    public Order(String id, Table table, OrderStatus orderStatus, LocalDateTime dateAndTime, double total) {
+        this.id = id;
+        this.table = table;
+        this.orderStatus = orderStatus;
+        this.dateAndTime = dateAndTime;
+        this.total = total;
+        this.items = new HashMap<>();
     }
 
     /**

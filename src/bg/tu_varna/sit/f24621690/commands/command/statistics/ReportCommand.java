@@ -1,10 +1,11 @@
 package bg.tu_varna.sit.f24621690.commands.command.statistics;
 
-import bg.tu_varna.sit.f24621690.base.Order;
-import bg.tu_varna.sit.f24621690.base.Restaurant;
+import bg.tu_varna.sit.f24621690.models.Order;
+import bg.tu_varna.sit.f24621690.models.Restaurant;
 import bg.tu_varna.sit.f24621690.commands.command.Command;
 import bg.tu_varna.sit.f24621690.enums.OrderStatus;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 /** Команда за изчисляване на приходите от платени поръчки за даден период. */
 public class ReportCommand implements Command {
@@ -32,6 +33,7 @@ public class ReportCommand implements Command {
     public String execute() {
         Restaurant restaurant = Restaurant.getInstance();
         double totalRevenue = 0;
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 
         for (Order order : restaurant.getOrders().values()) {
             if (order.getOrderStatus() == OrderStatus.PAID &&
@@ -40,6 +42,6 @@ public class ReportCommand implements Command {
                 totalRevenue += order.getTotal();
             }
         }
-        return String.format("Total revenue from %s to %s: %.2f eur.", from, to, totalRevenue);
+        return String.format("Total revenue from %s to %s: %.2f eur.", from.format(formatter), to.format(formatter), totalRevenue);
     }
 }
