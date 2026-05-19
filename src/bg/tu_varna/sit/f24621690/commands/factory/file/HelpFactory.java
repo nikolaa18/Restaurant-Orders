@@ -31,20 +31,20 @@ public class HelpFactory implements CommandFactory {
 
         sb.append("-".repeat(85)).append("\n");
 
-        sb.append(formatLine("additem <n> <cat> <p> <q>", "Adds a new item to the menu."));
+        sb.append(formatLine("additem <name> <cate> <pr> <quantity>", "Adds a new item to the menu."));
         sb.append(formatLine("removeitem <itemId>", "Removes an item from the menu."));
         sb.append(formatLine("menu", "Displays the full menu."));
 
         sb.append("-".repeat(85)).append("\n");
 
-        sb.append(formatLine("addtable <num> <seats>", "Adds a new table."));
-        sb.append(formatLine("removetable <num>", "Removes a table."));
+        sb.append(formatLine("addtable <number> <seats>", "Adds a new table."));
+        sb.append(formatLine("removetable <number>", "Removes a table."));
         sb.append(formatLine("tables", "Shows all tables and their status."));
 
         sb.append("-".repeat(85)).append("\n");
 
         sb.append(formatLine("openorder <tableNum>", "Opens a new order for a table."));
-        sb.append(formatLine("addtoorder <id> <item> <q>", "Adds an item to an order."));
+        sb.append(formatLine("addtoorder <id> <item> <quantity>", "Adds an item to an order."));
         sb.append(formatLine("removefromorder <id> <item>", "Removes an item from an order."));
         sb.append(formatLine("showorder <orderId>", "Shows order details and total."));
         sb.append(formatLine("closeorder <orderId>", "Finalizes and pays the order."));

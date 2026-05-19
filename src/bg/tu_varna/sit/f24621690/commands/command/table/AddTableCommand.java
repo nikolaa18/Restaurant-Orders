@@ -36,11 +36,11 @@ public class AddTableCommand implements Command {
         Restaurant restaurant = Restaurant.getInstance();
 
         if (restaurant.getTables().containsKey(number)) {
-            throw new Exception("Table number " + number + " already exists.");
+            throw new Exception("Table #" + number + " already exists.");
         }
 
         Table table = new Table(number, seats);
         restaurant.getTables().put(number, table);
-        return "Table " + number + " added successfully.";
+        return "Table #" + number + " added successfully.";
     }
 }
